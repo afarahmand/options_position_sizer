@@ -1,0 +1,8 @@
+Store:
+- ticker symbol
+- date
+- delta (float)
+- credit received (float)
+- success?
+
+Search by ticker symbol
