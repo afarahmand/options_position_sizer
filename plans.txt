@@ -6,3 +6,44 @@ Store:
 - success?
 
 Search by ticker symbol
+
+
+
+State Shape
+
+entities: {
+  trades: {
+    0: {
+      credit_received: 0.0,
+      date: datetime,
+      delta: 0.0,
+      success: True,
+      ticker: "AAPL"
+    },
+    1: {}
+    ...
+  }
+},
+session: {
+  accountSize: float,
+  creditReceived: float,
+  numberOfSimulations: integer,
+  numberOfTrades: integer,
+  shortContractDelta: float,
+  simulationResults: {
+    1 (% or contract\trade): {
+      endingAccountBalance: {
+        average: float,
+        best: float,
+        worst: float
+      }
+      simulations: {
+        1: {
+
+        },
+        ...
+      }
+    },
+    2: {}
+  }
+}
