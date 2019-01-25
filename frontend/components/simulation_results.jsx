@@ -2,9 +2,10 @@ import React from 'react';
 import SimulationResult from './simulation_result';
 
 const SimulationResults = ({ simulationResults }) => {
-  if (simulationResults === null) {
-    console.log("Hi");
+  if (simulationResults === {}) {
+    return null;
   }
+
   return (
     <section id="simulation-results">
       <header>

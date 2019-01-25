@@ -9,7 +9,7 @@ const renderButton = (onClickFunc, text, disableButton = false) => {
 };
 
 const Controller = ({
-  params, disableButtons, analyze, compute, view, update
+  params, disableAnalyze, disableView, analyze, compute, view, update
 }) => {
   return (
     <form>
@@ -24,12 +24,61 @@ const Controller = ({
           </input>
         </li>
 
+        <li>
+          Credit Received [$]
+          <input
+            type="text"
+            value={params.creditReceived}
+            onChange={update('creditReceived')}
+          >
+          </input>
+        </li>
 
 
         <li>
+          Short Contract Delta
+          <input
+            type="text"
+            value={params.shortContractDelta}
+            onChange={update('shortContractDelta')}
+          >
+          </input>
+        </li>
+
+        <li>
+          Simulation Increment [%]
+          <input
+            type="text"
+            value={params.simulationIncrement}
+            onChange={update('simulationIncrement')}
+          >
+          </input>
+        </li>
+
+        <li>
+          # of Simulations
+          <input
+            type="text"
+            value={params.numberOfSimulations}
+            onChange={update('numberOfSimulations')}
+          >
+          </input>
+        </li>
+
+        <li>
+          # of Trades
+          <input
+            type="text"
+            value={params.numberOfTrades}
+            onChange={update('numberOfTrades')}
+          >
+          </input>
+        </li>
+
+        <li>
           {renderButton(compute, "Compute", false)}
-          {renderButton(view, "View", disableButtons)}
-          {renderButton(analyze, "Analyze", disableButtons)}
+          {renderButton(view, "View", disableView)}
+          {renderButton(analyze, "Analyze", disableAnalyze)}
         </li>
       </ul>
     </form>
@@ -37,54 +86,3 @@ const Controller = ({
 };
 
 export default Controller;
-
-
-// <li>
-//   Credit Received [$]
-//   <input
-//     type="text"
-//     value={params.creditReceived}
-//     onChange={update('creditReceived')}
-//   >
-//   </input>
-// </li>
-//
-// <li>
-//   Short Contract Delta
-//   <input
-//     type="text"
-//     value={params.shortContractDelta}
-//     onChange={update('shortContractDelta')}
-//   >
-//   </input>
-// </li>
-//
-// <li>
-//   Simulation Increment [%]
-//   <input
-//     type="text"
-//     value={params.simulationIncrement}
-//     onChange={update('simulationIncrement')}
-//   >
-//   </input>
-// </li>
-//
-// <li>
-//   # of Simulations
-//   <input
-//     type="text"
-//     value={params.numberOfSimulations}
-//     onChange={update('numberOfSimulations')}
-//   >
-//   </input>
-// </li>
-//
-// <li>
-//   # of Trades
-//   <input
-//     type="text"
-//     value={params.numberOfTrades}
-//     onChange={update('numberOfTrades')}
-//   >
-//   </input>
-// </li>
