@@ -1,3 +1,7 @@
+#error-display {
+  color: red;
+}
+
 body {
   font-family: sans-serif;
   font-size: .9em;
@@ -12,12 +16,15 @@ form {
 ul {
   margin: 0;
   padding: 0;
+}
+
+header ul {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-li {
+header li {
   list-style: none;
   padding-top: 20px;
 }
@@ -38,17 +45,17 @@ button:hover:enabled {
   background-color: black;
 }
 
-li:last-child {
+header li:last-child {
   padding-top: 0px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-li:last-child button:first-child {
+header li:last-child button:first-child {
   margin-bottom: 5px;
 }
 
-li:last-child button:last-child {
+header li:last-child button:last-child {
   margin-top: 5px;
 }
