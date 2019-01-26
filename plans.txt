@@ -30,20 +30,27 @@ session: {
   numberOfSimulations: integer,
   numberOfTrades: integer,
   shortContractDelta: float,
-  simulationResults: {
-    1 (% or contract\trade): {
-      endingAcctBalance: {
-        average: float,
-        best: float,
-        worst: float
-      }
-      simulations: {
-        1: {
-
+  results: {
+    "Percentage Per Trade": {
+      1 (% or contract\trade): {
+        "Final Account Balance": {
+          average: float,
+          median: float,
+          best: float,
+          worst: float
         },
-        ...
-      }
-    },
-    2: {}
+        "Simulation": {
+          1: {
+            "Trade #": {
+              0: initAcctBalance,
+              1: ...
+            }
+          },
+          2: {}...
+        }
+      },
+      2: {},
+      ...
+    }
   }
 }
