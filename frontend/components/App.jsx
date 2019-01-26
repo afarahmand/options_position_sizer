@@ -2,11 +2,11 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router';
 import { withRouter } from 'react-router-dom';
 
-import { validateInputs } from '../utils/helpers';
+import { getResults, validateInputs } from '../utils/helpers';
 import Controller from './controller';
 
-// import AnalysisResults from './analysis_results';
-import SimulationResults from './simulation_results';
+// import DisplayAnalysis from './display_analysis';
+import DisplayResults from './display_results';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,13 +14,13 @@ class App extends React.Component {
 
     this.state = {
       errors: [],
-      accountSize: "1000.00",
-      creditReceived: "1.00",
-      numberOfSimulations: "3",
-      numberOfTrades: "10",
-      shortContractDelta: "0.20",
-      simulationIncrement: "1.00",
-      simulationResults: {},
+      initAcctBalance: "1000.00",
+      creditReceived: "250.00",
+      numOfSimulations: "1",
+      numOfTrades: "10",
+      shortContractDelta: "0.50",
+      increment: "20.00",
+      results: {},
       ui: {
         disableAnalyze: true,
         disableView: true
@@ -50,22 +50,21 @@ class App extends React.Component {
     let errors = validateInputs(params);
 
     if (errors.length === 0) {
-      console.log("Errors App: ", errors);
       this.setState({
         ui: {
           disableAnalyze: false,
-          disableView: true
+          disableView: false
         },
-        accountSize: Number(params.accountSize).toFixed(2).toString(),
+        initAcctBalance: Number(params.initAcctBalance).toFixed(2).toString(),
         creditReceived: Number(params.creditReceived).toFixed(2).toString(),
-        numberOfSimulations: Number(params.numberOfSimulations).toFixed(0).toString(),
-        numberOfTrades: Number(params.numberOfTrades).toFixed(0).toString(),
         shortContractDelta: Number(params.shortContractDelta).toFixed(2).toString(),
-        simulationIncrement: Number(params.simulationIncrement).toFixed(2).toString()
+        increment: Number(params.increment).toFixed(2).toString(),
+        numOfSimulations: Number(params.numOfSimulations).toFixed(0).toString(),
+        numOfTrades: Number(params.numOfTrades).toFixed(0).toString()
       }, () => {
-        if (this.props.history.location.pathname !== '/view') {
-          this.props.history.push('/view');
-        }
+        const results = getResults(this.state);
+        console.log("results: ", results);
+        this.setState({ results: results });
       });
     } else {
       this.setState({
@@ -111,7 +110,7 @@ class App extends React.Component {
           />
         </header>
 
-        <section id="error-display">
+        <section id="display-errors">
           <ul>
             {
               this.state.errors.map((error, idx) => (
@@ -125,10 +124,11 @@ class App extends React.Component {
           <Route
             exact
             path="/view"
-            component={SimulationResults}
-            simulationResults={this.state.simulationResults}
+            component={DisplayResults}
+            results={this.state.results}
           />
         </Switch>
+
       </div>
     );
   }
