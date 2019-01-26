@@ -25,14 +25,14 @@ entities: {
   }
 },
 session: {
-  accountSize: float,
+  initAcctBalance: float,
   creditReceived: float,
   numberOfSimulations: integer,
   numberOfTrades: integer,
   shortContractDelta: float,
   simulationResults: {
     1 (% or contract\trade): {
-      endingAccountBalance: {
+      endingAcctBalance: {
         average: float,
         best: float,
         worst: float
