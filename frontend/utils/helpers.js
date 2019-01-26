@@ -1,11 +1,110 @@
+const successfulTrade = shortContractDelta => (
+  Math.random() > shortContractDelta
+);
+
+const getTradeGain = (creditReceived, shortContractDelta) => {
+  if(successfulTrade(shortContractDelta)) {
+    return creditReceived;
+  } else {
+    return -(500-creditReceived);
+  }
+};
+
+const getSimulationResult = (
+  initAcctBalance,
+  creditReceived,
+  shortContractDelta,
+  numOfTrades,
+  percPerTrade
+) => {
+  const sameAsZero = 1;
+  let result = [Number(initAcctBalance)];
+
+  let i = 1, tradeGain;
+  while(i <= numOfTrades) {
+    if (result[i - 1] > sameAsZero) {
+      tradeGain = getTradeGain(creditReceived, shortContractDelta);
+      result.push(result[i-1] + tradeGain * (result[i-1]*percPerTrade/100));
+    } else {
+      result[i] = 0;
+    }
+
+    i++;
+  }
+
+  return result;
+};
+
+const getPercPerTradeResult = (
+  initAcctBalance,
+  creditReceived,
+  shortContractDelta,
+  numOfSimulations,
+  numOfTrades,
+  percPerTrade
+) => {
+  let result = {};
+
+  let simIndex = 1;
+  while(simIndex <= numOfSimulations) {
+    if (result[simIndex] === undefined) {
+      result[simIndex] = {};
+    }
+
+    result[simIndex] = getSimulationResult(
+      initAcctBalance,
+      creditReceived,
+      shortContractDelta,
+      numOfTrades,
+      percPerTrade
+    );
+
+    simIndex++;
+  }
+
+  return result;
+};
+
+export const getResults = ({
+  initAcctBalance,
+  creditReceived,
+  shortContractDelta,
+  increment,
+  numOfSimulations,
+  numOfTrades
+}) => {
+  let results = {};
+
+  let step = Number(increment);
+  let percPerTrade = step;
+  while(percPerTrade <= 100) {
+    if (results[percPerTrade.toString()] === undefined) {
+      results[percPerTrade.toString()] = {};
+    }
+
+    results[percPerTrade.toString()] = getPercPerTradeResult(
+      initAcctBalance,
+      creditReceived,
+      shortContractDelta,
+      numOfSimulations,
+      numOfTrades,
+      percPerTrade
+    );
+
+    percPerTrade+=step;
+  }
+
+  return results;
+};
+
 export const validateInputs = (params) => {
   let errors = [];
 
-  if (isNaN(params.accountSize)) {
-    errors.push("accountSize is not a number");
+  if (isNaN(params.initAcctBalance)) {
+    errors.push("initAcctBalance is not a number");
   }
-  else if (Number(params.accountSize).toFixed(2) < 10) {
-    errors.push("accountSize is too small");
+  else if (Number(params.initAcctBalance).toFixed(2) < 10) {
+    errors.push("initAcctBalance is too small");
   }
 
   if (isNaN(params.creditReceived)) {
@@ -24,27 +123,25 @@ export const validateInputs = (params) => {
     errors.push("shortContractDelta is too high");
   }
 
-  if (isNaN(params.simulationIncrement)) {
-    errors.push("simulationIncrement is not a number");
-  } else if (Number(params.simulationIncrement) < 0.1) {
-    errors.push("simulationIncrement is too low");
-  } else if (Number(params.simulationIncrement) > 100.0) {
-    errors.push("simulationIncrement is too high");
+  if (isNaN(params.increment)) {
+    errors.push("increment is not a number");
+  } else if (Number(params.increment) < 0.1) {
+    errors.push("increment is too low");
+  } else if (Number(params.increment) > 100.0) {
+    errors.push("increment is too high");
   }
 
-  if (isNaN(params.numberOfSimulations)) {
-    errors.push("invalid numberOfSimulations");
-  } else if (Number(params.numberOfSimulations).toFixed(0) < 1) {
-    errors.push("numberOfSimulations is too low");
+  if (isNaN(params.numOfSimulations)) {
+    errors.push("invalid numOfSimulations");
+  } else if (Number(params.numOfSimulations).toFixed(0) < 1) {
+    errors.push("numOfSimulations is too low");
   }
 
-  if (isNaN(params.numberOfTrades)) {
-    errors.push("invalid numberOfTrades");
-  } else if (Number(params.numberOfTrades).toFixed(0) < 1) {
-    errors.push("numberOfTrades is too low");
+  if (isNaN(params.numOfTrades)) {
+    errors.push("invalid numOfTrades");
+  } else if (Number(params.numOfTrades).toFixed(0) < 1) {
+    errors.push("numOfTrades is too low");
   }
-
-  console.log("ValErrors: ", errors);
 
   return errors;
 };
