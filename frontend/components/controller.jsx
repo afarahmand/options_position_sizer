@@ -15,11 +15,11 @@ const Controller = ({
     <form>
       <ul>
         <li>
-          Initial Account Size [$]
+          Initial Account Balance [$]
           <input
             type="text"
-            value={params.accountSize}
-            onChange={update('accountSize')}
+            value={params.initAcctBalance}
+            onChange={update('initAcctBalance')}
           >
           </input>
         </li>
@@ -49,8 +49,8 @@ const Controller = ({
           Simulation Increment [%]
           <input
             type="text"
-            value={params.simulationIncrement}
-            onChange={update('simulationIncrement')}
+            value={params.increment}
+            onChange={update('increment')}
           >
           </input>
         </li>
@@ -59,8 +59,8 @@ const Controller = ({
           # of Simulations
           <input
             type="text"
-            value={params.numberOfSimulations}
-            onChange={update('numberOfSimulations')}
+            value={params.numOfSimulations}
+            onChange={update('numOfSimulations')}
           >
           </input>
         </li>
@@ -69,8 +69,8 @@ const Controller = ({
           # of Trades
           <input
             type="text"
-            value={params.numberOfTrades}
-            onChange={update('numberOfTrades')}
+            value={params.numOfTrades}
+            onChange={update('numOfTrades')}
           >
           </input>
         </li>
