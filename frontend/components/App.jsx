@@ -16,10 +16,9 @@ class App extends React.Component {
       errors: [],
       initAcctBalance: "1000.00",
       creditReceived: "250.00",
-      numOfSimulations: "1",
-      numOfTrades: "10",
+      numOfSimulations: "3",
+      numOfTrades: "5",
       shortContractDelta: "0.50",
-      increment: "20.00",
       results: {},
       ui: {
         disableAnalyze: true,
@@ -45,7 +44,6 @@ class App extends React.Component {
   compute(e) {
     e.preventDefault();
 
-    // Validate inputs
     let params = this.state;
     let errors = validateInputs(params);
 
@@ -58,7 +56,6 @@ class App extends React.Component {
         initAcctBalance: Number(params.initAcctBalance).toFixed(2).toString(),
         creditReceived: Number(params.creditReceived).toFixed(2).toString(),
         shortContractDelta: Number(params.shortContractDelta).toFixed(2).toString(),
-        increment: Number(params.increment).toFixed(2).toString(),
         numOfSimulations: Number(params.numOfSimulations).toFixed(0).toString(),
         numOfTrades: Number(params.numOfTrades).toFixed(0).toString()
       }, () => {

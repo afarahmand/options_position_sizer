@@ -46,16 +46,6 @@ const Controller = ({
         </li>
 
         <li>
-          Simulation Increment [%]
-          <input
-            type="text"
-            value={params.increment}
-            onChange={update('increment')}
-          >
-          </input>
-        </li>
-
-        <li>
           # of Simulations
           <input
             type="text"

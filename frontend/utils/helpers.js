@@ -15,18 +15,18 @@ const getSimulationResult = (
   creditReceived,
   shortContractDelta,
   numOfTrades,
-  percPerTrade
-) => {
+  contractsPerTrade
+  ) => {
   const sameAsZero = 1;
   let result = [Number(initAcctBalance)];
 
   let i = 1, tradeGain;
   while(i <= numOfTrades) {
-    if (result[i - 1] > sameAsZero) {
+    if (result[i-1] > sameAsZero) {
       tradeGain = getTradeGain(creditReceived, shortContractDelta);
-      result.push(result[i-1] + tradeGain * (result[i-1]*percPerTrade/100));
+      result.push(result[i-1] + (tradeGain * contractsPerTrade));
     } else {
-      result[i] = 0;
+      result[i] = result[i-1];
     }
 
     i++;
@@ -35,14 +35,14 @@ const getSimulationResult = (
   return result;
 };
 
-const getPercPerTradeResult = (
+const getContractsPerTradeResult = (
   initAcctBalance,
   creditReceived,
   shortContractDelta,
   numOfSimulations,
   numOfTrades,
-  percPerTrade
-) => {
+  contractsPerTrade
+  ) => {
   let result = {};
 
   let simIndex = 1;
@@ -56,7 +56,7 @@ const getPercPerTradeResult = (
       creditReceived,
       shortContractDelta,
       numOfTrades,
-      percPerTrade
+      contractsPerTrade
     );
 
     simIndex++;
@@ -69,32 +69,30 @@ export const getResults = ({
   initAcctBalance,
   creditReceived,
   shortContractDelta,
-  increment,
   numOfSimulations,
   numOfTrades
-}) => {
+  }) => {
   let results = {};
 
-  let step = Number(increment);
-  let percPerTrade = step;
-  while(percPerTrade <= 100) {
-    if (results[percPerTrade.toString()] === undefined) {
-      results[percPerTrade.toString()] = {};
+  let contractsPerTrade = 1;
+  while(contractsPerTrade <= 10) {
+    if (results[contractsPerTrade.toString()] === undefined) {
+      results[contractsPerTrade.toString()] = {};
     }
 
-    results[percPerTrade.toString()] = getPercPerTradeResult(
+    results[contractsPerTrade.toString()] = getContractsPerTradeResult(
       initAcctBalance,
       creditReceived,
       shortContractDelta,
       numOfSimulations,
       numOfTrades,
-      percPerTrade
+      contractsPerTrade
     );
 
-    percPerTrade+=step;
+    contractsPerTrade++;
   }
 
-  return results;
+  return { "Contracts Per Trade": results };
 };
 
 export const validateInputs = (params) => {
@@ -121,14 +119,6 @@ export const validateInputs = (params) => {
     errors.push("shortContractDelta is too low");
   } else if (Number(params.shortContractDelta) > 1.0) {
     errors.push("shortContractDelta is too high");
-  }
-
-  if (isNaN(params.increment)) {
-    errors.push("increment is not a number");
-  } else if (Number(params.increment) < 0.1) {
-    errors.push("increment is too low");
-  } else if (Number(params.increment) > 100.0) {
-    errors.push("increment is too high");
   }
 
   if (isNaN(params.numOfSimulations)) {
