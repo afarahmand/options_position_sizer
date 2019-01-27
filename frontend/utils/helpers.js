@@ -1,3 +1,35 @@
+const isOdd = num => ( num & 1 );
+
+const getContractsPerTradeStats = (
+  contractsPerTrade, numOfSimulations, numOfTrades
+  ) => {
+  let result = { average: null, median: null, min: null, max: null };
+  let finalAcctBalances = [];
+
+  Object.keys(contractsPerTrade).forEach(simIndex => {
+    finalAcctBalances.push(contractsPerTrade[simIndex]["Trade"][numOfTrades]);
+  });
+
+  finalAcctBalances = finalAcctBalances.sort(spaceship);
+
+  result.min = finalAcctBalances[0];
+  result.max = finalAcctBalances[numOfSimulations - 1];
+
+  // Average
+  let sum = 0;
+  sum = finalAcctBalances.reduce(function(total, num) { return total+num; });
+  result.average = sum/numOfTrades;
+
+  // Median
+  if (isOdd(finalAcctBalances.length)) {
+    result.median = finalAcctBalances[Math.floor(finalAcctBalances.length/2)];
+  } else {
+    result.median = finalAcctBalances[finalAcctBalances.length/2];
+  }
+
+  return result;
+};
+
 const successfulTrade = shortContractDelta => (
   Math.random() > shortContractDelta
 );
@@ -32,7 +64,7 @@ const getSimulationResult = (
     i++;
   }
 
-  return result;
+  return { "Trade": result };
 };
 
 const getContractsPerTradeResult = (
@@ -44,6 +76,7 @@ const getContractsPerTradeResult = (
   contractsPerTrade
   ) => {
   let result = {};
+  let stats;
 
   let simIndex = 1;
   while(simIndex <= numOfSimulations) {
@@ -62,7 +95,17 @@ const getContractsPerTradeResult = (
     simIndex++;
   }
 
-  return result;
+  stats = getContractsPerTradeStats(result, numOfSimulations, numOfTrades);
+
+  return {
+    "Final Account Balance": {
+      "average": stats.average,
+      "median": stats.median,
+      "max": stats.max,
+      "min": stats.min
+    },
+    "Simulation": result
+  };
 };
 
 export const getResults = ({
@@ -134,4 +177,12 @@ export const validateInputs = (params) => {
   }
 
   return errors;
+};
+
+const spaceship = function (a, b) {
+  a = Number(a);
+  b = Number(b);
+  if (a < b) return -1;
+  if (a === b) return 0;
+  if (a > b) return  1;
 };
