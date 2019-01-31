@@ -59,3 +59,28 @@ header li:last-child button:first-child {
 header li:last-child button:last-child {
   margin-top: 5px;
 }
+
+section header {
+  text-align: center;
+}
+
+section#results-index ul li {
+  display: inline-block;
+  padding: 0;
+  border: 1px solid black;
+  margin: 20px;
+  font-size: 48px;
+  color: black;
+}
+
+section#results-index ul li a {
+  display: block;
+  padding: 50px;
+  text-decoration: none;
+  color: black;
+}
+
+section#results-index ul li a:hover {
+  background-color: black;
+  color: white;
+}
