@@ -6,7 +6,7 @@ import { getResults, validateInputs } from '../utils/helpers';
 import Controller from './controller';
 
 // import DisplayAnalysis from './display_analysis';
-import DisplayResults from './display_results';
+import DisplayResultsIndex from './display_results_index';
 
 class App extends React.Component {
   constructor(props) {
@@ -120,8 +120,7 @@ class App extends React.Component {
           <Route
             exact
             path="/view"
-            component={DisplayResults}
-            results={this.state.results}
+            render={() => <DisplayResultsIndex results={this.state.results} />}
           />
         </Switch>
 
