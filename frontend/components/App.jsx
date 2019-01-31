@@ -50,8 +50,8 @@ class App extends React.Component {
     if (errors.length === 0) {
       this.setState({
         ui: {
-          disableAnalyze: false,
-          disableView: false
+          disableAnalyze: this.props.location.pathname === "/analyze",
+          disableView: this.props.location.pathname === "/view"
         },
         initAcctBalance: Number(params.initAcctBalance).toFixed(2).toString(),
         creditReceived: Number(params.creditReceived).toFixed(2).toString(),
@@ -60,7 +60,6 @@ class App extends React.Component {
         numOfTrades: Number(params.numOfTrades).toFixed(0).toString()
       }, () => {
         const results = getResults(this.state);
-        console.log("results: ", results);
         this.setState({ results: results });
       });
     } else {
