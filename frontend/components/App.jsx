@@ -49,6 +49,7 @@ class App extends React.Component {
 
     if (errors.length === 0) {
       this.setState({
+        errors: [],
         ui: {
           disableAnalyze: this.props.location.pathname === "/analyze",
           disableView: this.props.location.pathname === "/view"
@@ -65,6 +66,7 @@ class App extends React.Component {
     } else {
       this.setState({
         errors: errors,
+        results: {},
         ui: {
           disableAnalyze: true,
           disableView: true
