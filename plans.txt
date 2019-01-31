@@ -31,13 +31,13 @@ session: {
   numberOfTrades: integer,
   shortContractDelta: float,
   results: {
-    "Percentage Per Trade": {
-      1 (% or contract\trade): {
+    "Contracts Per Trade": {
+      1: {
         "Final Account Balance": {
           average: float,
           median: float,
-          best: float,
-          worst: float
+          max: float,
+          min: float
         },
         "Simulation": {
           1: {
