@@ -179,7 +179,7 @@ export const validateInputs = (params) => {
   return errors;
 };
 
-const spaceship = function (a, b) {
+export const spaceship = function (a, b) {
   a = Number(a);
   b = Number(b);
   if (a < b) return -1;
