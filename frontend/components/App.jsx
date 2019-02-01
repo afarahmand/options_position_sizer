@@ -7,6 +7,7 @@ import Controller from './controller';
 
 // import DisplayAnalysis from './display_analysis';
 import DisplayResultsIndex from './display_results_index';
+import DisplayResult from './display_result';
 
 class App extends React.Component {
   constructor(props) {
@@ -123,6 +124,14 @@ class App extends React.Component {
             exact
             path="/view"
             render={() => <DisplayResultsIndex results={this.state.results} />}
+          />
+          <Route
+            path="/view/:contractsPerTrade"
+            render={(props) =>
+              <DisplayResult
+                result={this.state.results["Contracts Per Trade"][props.match.params.contractsPerTrade]}
+              />
+            }
           />
         </Switch>
 
