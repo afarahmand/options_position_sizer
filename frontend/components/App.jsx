@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { getResults, validateInputs } from '../utils/helpers';
 import Controller from './controller';
 
-// import DisplayAnalysis from './display_analysis';
+import DisplayAnalysisIndex from './display_analysis_index';
 import DisplayResultsIndex from './display_results_index';
 import DisplayResult from './display_result';
 
@@ -130,6 +130,15 @@ class App extends React.Component {
             render={(props) =>
               <DisplayResult
                 result={this.state.results["Contracts Per Trade"][props.match.params.contractsPerTrade]}
+              />
+            }
+          />
+          <Route
+            exact
+            path="/analyze"
+            render={() =>
+              <DisplayAnalysisIndex
+                results={this.state.results["Contracts Per Trade"]}
               />
             }
           />
