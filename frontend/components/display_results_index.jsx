@@ -12,7 +12,7 @@ const DisplayResultsIndex = ({ results }) => {
   }
 
   return (
-    <section id="results-index">
+    <section className="index results-index">
       <header>
         <h2>Results for Different Contracts Per Trade</h2>
       </header>

@@ -8,6 +8,22 @@ body {
   margin: 0;
 }
 
+h1 {
+  display: none;
+}
+
+h1, h2, h3, h4 {
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  margin: 0;
+}
+
 form {
   border-bottom: 1px solid black;
   padding: 10px;
@@ -64,23 +80,38 @@ section header {
   text-align: center;
 }
 
-section#results-index ul li {
+.index > ul > li {
   display: inline-block;
   padding: 0;
   border: 1px solid black;
   margin: 20px;
-  font-size: 48px;
   color: black;
 }
 
-section#results-index ul li a {
+.index > ul > li > a {
   display: block;
-  padding: 50px;
   text-decoration: none;
   color: black;
 }
 
-section#results-index ul li a:hover {
+.index > ul > li > a:hover {
   background-color: black;
   color: white;
+}
+
+.results-index > ul > li {
+  font-size: 48px;
+}
+
+.results-index a {
+  padding: 50px;
+}
+
+.analysis-index .stats li {
+  list-style: none;
+  margin-top: 10px;
+}
+
+.analysis-index a {
+  padding: 20px;
 }

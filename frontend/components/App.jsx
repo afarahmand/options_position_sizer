@@ -97,6 +97,9 @@ class App extends React.Component {
     return (
       <div>
         <header>
+          <h1>
+            Options Position Sizer
+          </h1>
           <Controller
             params={params}
             disableAnalyze={this.state.ui.disableAnalyze}
