@@ -22,6 +22,7 @@ h1, h2, h3, h4 {
 
 h3 {
   margin: 0;
+  margin-bottom: 10px;
 }
 
 form {
@@ -34,6 +35,10 @@ ul {
   padding: 0;
 }
 
+li {
+  list-style: none;
+}
+
 header ul {
   display: flex;
   flex-direction: row;
@@ -41,7 +46,6 @@ header ul {
 }
 
 header li {
-  list-style: none;
   padding-top: 20px;
 }
 
@@ -114,4 +118,11 @@ section header {
 
 .analysis-index a {
   padding: 20px;
+}
+
+.simulation-index > li {
+  display: inline-block;
+  padding: 20px;
+  border: 1px solid black;
+  margin: 10px;
 }
