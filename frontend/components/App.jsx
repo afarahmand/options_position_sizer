@@ -7,7 +7,8 @@ import Controller from './controller';
 
 import DisplayAnalysisIndex from './display_analysis_index';
 import DisplayResultsIndex from './display_results_index';
-import DisplayResult from './display_result';
+
+import DisplaySimulationIndex from './display_simulation_index';
 
 class App extends React.Component {
   constructor(props) {
@@ -128,14 +129,18 @@ class App extends React.Component {
             path="/view"
             render={() => <DisplayResultsIndex results={this.state.results} />}
           />
+
           <Route
             path="/view/:contractsPerTrade"
-            render={(props) =>
-              <DisplayResult
-                result={this.state.results["Contracts Per Trade"][props.match.params.contractsPerTrade]}
-              />
-            }
+            render={(props) => {
+              const cpt = props.match.params.contractsPerTrade;
+              const results = this.state.results["Contracts Per Trade"];
+              if (results === undefined) { return null; }
+              if (results[cpt] === undefined) { return null; }
+              return (<DisplaySimulationIndex result={results[cpt]}/>);
+            }}
           />
+
           <Route
             exact
             path="/analyze"

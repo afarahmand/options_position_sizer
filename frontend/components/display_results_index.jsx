@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import DisplayResult from './display_result.jsx';
 import DisplayResultsIndexItemSummary
   from './display_results_index_item_summary';
 
