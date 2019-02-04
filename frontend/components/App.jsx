@@ -18,8 +18,8 @@ class App extends React.Component {
       errors: [],
       initAcctBalance: "1000.00",
       creditReceived: "250.00",
-      numOfSimulations: "3",
-      numOfTrades: "5",
+      numOfSimulations: "1",
+      numOfTrades: "1",
       shortContractDelta: "0.50",
       results: {},
       ui: {
@@ -37,7 +37,7 @@ class App extends React.Component {
   analyze () {
     this.setState({
       ui: {
-        disableAnalyze: true,
+        disableAnalyze: false,
         disableView: false
       }
     }, () => { this.props.history.push('/analyze'); });
@@ -53,8 +53,8 @@ class App extends React.Component {
       this.setState({
         errors: [],
         ui: {
-          disableAnalyze: this.props.location.pathname === "/analyze",
-          disableView: this.props.location.pathname === "/view"
+          disableAnalyze: false,
+          disableView: false
         },
         initAcctBalance: Number(params.initAcctBalance).toFixed(2).toString(),
         creditReceived: Number(params.creditReceived).toFixed(2).toString(),
@@ -70,8 +70,8 @@ class App extends React.Component {
         errors: errors,
         results: {},
         ui: {
-          disableAnalyze: true,
-          disableView: true
+          disableAnalyze: false,
+          disableView: false
         }
       });
     }
@@ -87,7 +87,7 @@ class App extends React.Component {
     this.setState({
       ui: {
         disableAnalyze: false,
-        disableView: true
+        disableView: false
       }
     }, () => { this.props.history.push('/view'); });
   }
