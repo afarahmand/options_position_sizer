@@ -7,17 +7,14 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
     "redux-logger": "^3.0.6",
+    "uglifyjs-webpack-plugin": "^2.1.1",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1"
   },
   "dependencies": {
-    "lodash": "^4.17.11",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-redux": "^6.0.0",
-    "react-router-dom": "^4.3.1",
-    "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "react-router-dom": "^4.3.1"
   },
   "description": "This README would normally document whatever steps are necessary to get the application up and running.",
   "version": "1.0.0",
@@ -28,7 +25,7 @@
   "scripts": {
     "dev": "webpack --watch --mode=development",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "webpack"
+    "postinstall": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
@@ -40,5 +37,9 @@
   "bugs": {
     "url": "https://github.com/afarahmand/options_position_sizer/issues"
   },
-  "homepage": "https://github.com/afarahmand/options_position_sizer#readme"
+  "homepage": "https://github.com/afarahmand/options_position_sizer#readme",
+  "engines": {
+    "node": "11.9.0",
+    "npm": "6.7.0"
+  }
 }
